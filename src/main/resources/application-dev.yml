@@ -1,0 +1,27 @@
+#spring.application.name=PNCControllers
+#spring.mustache.suffix=.html
+
+spring:
+  sql:
+    init:
+      mode: always
+  application:
+    name: PNCControllers
+  mustache:
+    suffix: .html
+  datasource:
+    url: jdbc:postgresql://localhost:5432/parcial2_database
+    username: postgres
+    password: admin # Change this for your password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+    show-sql: true
+    defer-datasource-initialization: true # Permite ejecutar la creación de tablas antes de ejecutar el script de inicialización
+
+jwt:
+  secret: "2dc4d72e-b851-4844-aa5d-f944e452f0d4" # jwt secret
+  exptime: 1296000000  # Expiration time in seconds (15 dias)
