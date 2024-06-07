@@ -13,7 +13,6 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "sec01_users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,7 +27,7 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "sec01_permissions",
+            name = "permissions",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
