@@ -6,6 +6,6 @@ import com.kevocodes.pnccontrollers.domain.entities.Prescription;
 
 public interface PrescriptionService {
 
-    void createPresctriprion(Prescription prescription);
-    void deletePrescription(UUID prescriptionid) throws Exception;
+    void createPrescription(Prescription prescription) throws Exception;
+    void deletePrescription(UUID prescriptionId) throws Exception;
 }
