@@ -28,13 +28,13 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "id_user", nullable = true, foreignKey = @ForeignKey(name = "FK_APPOINTMENT_USER"))
-    private User pacient;
+    private User patient;
 
     @Column(nullable = false)
     private Date appointmentDate;
 
     @Column(nullable = false)
-    private Boolean aproved;
+    private Boolean approved;
 
     @Column(nullable = true)
     private Date endDate;
