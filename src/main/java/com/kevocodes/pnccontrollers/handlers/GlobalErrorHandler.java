@@ -5,6 +5,7 @@ import com.kevocodes.pnccontrollers.utils.ErrorsTool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,6 +42,14 @@ public class GlobalErrorHandler {
         return GeneralResponse.builder()
                 .status(HttpStatus.BAD_REQUEST)
                 .data(errorsTool.mapErrors(ex.getBindingResult().getFieldErrors()))
+                .build();
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<GeneralResponse> AccessDeniedHandler(AccessDeniedException ex) {
+        return GeneralResponse.builder()
+                .status(HttpStatus.FORBIDDEN)
+                .message("Access denied")
                 .build();
     }
 }

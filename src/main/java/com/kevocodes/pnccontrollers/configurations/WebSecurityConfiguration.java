@@ -2,37 +2,34 @@ package com.kevocodes.pnccontrollers.configurations;
 
 import com.kevocodes.pnccontrollers.domain.entities.User;
 import com.kevocodes.pnccontrollers.services.UserService;
-import io.jsonwebtoken.Jwts;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.security.SecureRandom;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class WebSecurityConfiguration {
     private final PasswordEncoder passwordEncoder;
 
     private final UserService userService;
 
-    private final JWTTokenFIlter filter;
+    private final JWTTokenFilter filter;
 
-    public WebSecurityConfiguration(PasswordEncoder passwordEncoder, UserService userService, JWTTokenFIlter filter) {
+    public WebSecurityConfiguration(PasswordEncoder passwordEncoder, UserService userService, JWTTokenFilter filter) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.filter = filter;
@@ -59,28 +56,16 @@ public class WebSecurityConfiguration {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        //Http login and cors disabled
-        http.httpBasic(withDefaults()).csrf(AbstractHttpConfigurer::disable);
+        http.httpBasic(withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()  // Permitir todos los accesos a /api/auth/**
+                        .anyRequest().authenticated())
+                .exceptionHandling(handling -> handling.authenticationEntryPoint((req, res, ex) -> {
+                    res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed!");
+                }));
 
-        //Route filter
-        http.authorizeHttpRequests(auth ->
-                auth
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .anyRequest().authenticated()
-        );
-
-        //Statelessness
-        http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-        //UnAunthorized handler
-        http.exceptionHandling(handling -> handling.authenticationEntryPoint((req, res, ex) -> {
-            res.sendError(
-                    HttpServletResponse.SC_UNAUTHORIZED,
-                    "Auth fail!"
-            );
-        }));
-
-        //JWT filter
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
