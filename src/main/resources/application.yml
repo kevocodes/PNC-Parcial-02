@@ -10,9 +10,9 @@ spring:
   mustache:
     suffix: .html
   datasource:
-    url: jdbc:postgresql://localhost:5432/library
+    url: jdbc:postgresql://localhost:5432/parcial_02
     username: postgres
-    password: Kevin1! # Change this for your password
+    password: admin # Change this for your password
   jpa:
     hibernate:
       ddl-auto: update

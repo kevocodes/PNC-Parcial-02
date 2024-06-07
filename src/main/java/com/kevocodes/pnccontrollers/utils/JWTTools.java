@@ -32,31 +32,21 @@ public class JWTTools {
     }
 
     public Boolean verifyToken(String token) {
-        try {
-            JwtParser parser = Jwts.parser()
-                    .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
-                    .build();
+        JwtParser parser = Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
+                .build();
 
-            parser.parse(token);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        parser.parse(token);
+        return true;
     }
 
     public String getUsernameFrom(String token) {
-        try {
-            JwtParser parser = Jwts.parser()
-                    .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
-                    .build();
+        JwtParser parser = Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
+                .build();
 
-            return parser.parseSignedClaims(token)
-                    .getPayload()
-                    .getSubject();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return parser.parseSignedClaims(token)
+                .getPayload()
+                .getSubject();
     }
 }
