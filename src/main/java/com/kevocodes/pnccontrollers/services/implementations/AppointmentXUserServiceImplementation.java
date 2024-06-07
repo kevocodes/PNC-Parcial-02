@@ -28,7 +28,7 @@ public class AppointmentXUserServiceImplementation implements AppointmentXUserSe
 
     @Override
     public List<AppointmentXUser> findAllByDoctorId(UUID id) {
-        return repository.findAllByDoctorId(id);
+        return repository.findAll();
     }
 
     @Override

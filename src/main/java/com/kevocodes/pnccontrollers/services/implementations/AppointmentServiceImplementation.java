@@ -39,7 +39,7 @@ public class AppointmentServiceImplementation implements AppointmentService{
 
     @Override
     public List<Appointment> getAllByDate(Date thisDate) {
-        return repository.getAppointmentsByDate(thisDate);
+        return repository.findAll();
     }
 
     @Override
