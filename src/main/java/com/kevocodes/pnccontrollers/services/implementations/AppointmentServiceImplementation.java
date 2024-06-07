@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.kevocodes.pnccontrollers.handlers.ModelNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.kevocodes.pnccontrollers.domain.entities.Appointment;
@@ -15,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AppointmentSeriviceImplementation implements AppointmentService{
+public class AppointmentServiceImplementation implements AppointmentService{
 
     private final AppointmentRepository repository;
 
@@ -30,8 +31,8 @@ public class AppointmentSeriviceImplementation implements AppointmentService{
     }
 
     @Override
-    public void changeAppointmentStatus(UUID appointmentId) throws Exception{
-        Appointment appointment = repository.findById(appointmentId).orElseThrow();
+    public void changeAppointmentStatus(UUID appointmentId) {
+        Appointment appointment = repository.findById(appointmentId).orElseThrow(() -> new ModelNotFoundException("Appointment not found"));
         appointment.setApproved(!appointment.getApproved());
         repository.save(appointment);
     }
@@ -43,7 +44,7 @@ public class AppointmentSeriviceImplementation implements AppointmentService{
 
     @Override
     public void finishAppointment(UUID appointmentId) throws Exception{
-        Appointment appointment = repository.findById(appointmentId).orElseThrow();
+        Appointment appointment = repository.findById(appointmentId).orElseThrow(() -> new ModelNotFoundException("Appointment not found"));
 
         appointment.setEndDate(Date.from(Instant.now()));
         repository.save(appointment);

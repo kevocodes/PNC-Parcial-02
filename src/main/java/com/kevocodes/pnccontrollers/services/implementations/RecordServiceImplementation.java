@@ -22,15 +22,8 @@ public class RecordServiceImplementation implements RecordService {
     }
 
     @Override
-    public void create(RecordDTO record, User user) {
-
-        Record newRecord = new Record();
-
-        newRecord.setIdRecord(record.getIdRecord());
-        newRecord.setPatient(user);
-        newRecord.setComments(record.getComments());
-
-        repository.save(newRecord);
+    public void create(Record record) {
+        repository.save(record);
     }
 
     @Override

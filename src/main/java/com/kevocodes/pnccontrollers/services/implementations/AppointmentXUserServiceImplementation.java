@@ -1,6 +1,7 @@
 package com.kevocodes.pnccontrollers.services.implementations;
 
 import com.kevocodes.pnccontrollers.domain.entities.AppointmentXUser;
+import com.kevocodes.pnccontrollers.handlers.ModelNotFoundException;
 import com.kevocodes.pnccontrollers.repositories.AppointmentXUserRepository;
 import com.kevocodes.pnccontrollers.services.AppointmentXUserService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class AppointmentXUserServiceImplementation implements AppointmentXUserSe
 
     @Override
     public AppointmentXUser findById(UUID id) {
-        return repository.findById(id).orElseThrow();
+        return repository.findById(id).orElseThrow(() -> new ModelNotFoundException("Appointment not found"));
     }
 
     @Override

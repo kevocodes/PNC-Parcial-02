@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface RecordService {
     List<Record> getAll();
-    void create(RecordDTO record, User user);
-    void update(Record record, String info);
-    void delete(Record record);
+    void create(Record info) throws Exception;
+    void update(Record record, String info) throws Exception;
+    void delete(Record record) throws Exception;
 
 }
