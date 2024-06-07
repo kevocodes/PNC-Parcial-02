@@ -8,7 +8,6 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "sec01_roles")
 public class Role {
     @Id
     private String id;

@@ -11,7 +11,6 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "sec01_tokens")
 public class Token {
 
     @Id
