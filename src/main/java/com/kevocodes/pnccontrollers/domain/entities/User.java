@@ -33,7 +33,7 @@ public class User implements UserDetails {
     )
     private List<Role> roles;
 
-    @Column(name = "active", insertable = false)
+    @Column(name = "active")
     private boolean active;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

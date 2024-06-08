@@ -1,5 +1,6 @@
 package com.kevocodes.pnccontrollers.domain.entities;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 @Data
 @NoArgsConstructor
@@ -30,7 +32,7 @@ public class Appointment {
     private UUID idAppointment;
 
     @ManyToOne
-    @JoinColumn(name = "id_user", nullable = true, foreignKey = @ForeignKey(name = "FK_APPOINTMENT_USER"))
+    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "FK_APPOINTMENT_USER"))
     private User user;
 
     @OneToMany(mappedBy = "appointment", cascade = CascadeType.MERGE)
@@ -38,5 +40,15 @@ public class Appointment {
 
     @Column(nullable = false)
     private Boolean approved;
+
+    @Column(nullable = false)
+    @Length(min = 2, max =  9999)
+    private String reason;
+
+    @Column(nullable = false)
+    private LocalDateTime appointmentDateTime;
+
+    @Column(nullable = true)
+    private LocalDateTime appointmentEndDateTime;
 
 }

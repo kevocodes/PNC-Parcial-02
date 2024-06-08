@@ -41,14 +41,4 @@ public class AppointmentXUser {
     @ManyToOne
     @JoinColumn(name = "id_specialty", nullable = false, foreignKey = @ForeignKey(name = "FK_APPOINTMENTXUSER_SPECIALTY"))
     private Specialty specialty;
-
-    @Column(nullable = false)
-    @Length(min = 2, max =  9999)
-    private String reason;
-
-    @Column(nullable = false)
-    private LocalDateTime appointmentDateTime;
-
-    @Column(nullable = true)
-    private LocalDateTime appointmentEndDateTime;
 }

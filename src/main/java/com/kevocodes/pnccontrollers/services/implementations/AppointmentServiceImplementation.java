@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.kevocodes.pnccontrollers.services.AppointmentXUserService;
 import org.springframework.stereotype.Service;
 
 import com.kevocodes.pnccontrollers.domain.entities.Appointment;
@@ -21,10 +22,16 @@ public class AppointmentServiceImplementation implements AppointmentService{
 
     private final AppointmentRepository repository;
     private final AppointmentXUserRepository repositoryAXU;
+    private final AppointmentXUserService appointmentXUserService;
 
     @Override
     public void createAppointment(Appointment object) {
+
         repository.save(object);
+
+        for (AppointmentXUser detail : object.getAppointmentDetails()) {
+            appointmentXUserService.create(detail);
+        }
     }
 
     @Override
