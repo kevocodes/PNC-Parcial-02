@@ -12,19 +12,23 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecordDTO {
-    @NotBlank
-    @NotNull
-    @NotEmpty
-    private UUID idRecord;
+public class PrescriptionDTO {
 
-    @NotBlank
-    @NotNull
-    @NotEmpty
-    private UUID idPatient;
+    private UUID idPrescription;
 
-    @NotBlank
     @NotNull
+    @NotBlank
     @NotEmpty
-    private String comments;
+    private String medicine;
+
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    private String dose;
+
+
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    private UUID idAppointment;
 }
