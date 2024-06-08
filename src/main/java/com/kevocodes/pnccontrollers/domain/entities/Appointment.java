@@ -15,14 +15,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Appointment {
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID idAppointment;
 
@@ -30,8 +33,8 @@ public class Appointment {
     @JoinColumn(name = "id_user", nullable = true, foreignKey = @ForeignKey(name = "FK_APPOINTMENT_USER"))
     private User user;
 
-    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL)
-    List<AppointmentXUser> appointmentXUser;
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.MERGE)
+    List<AppointmentXUser> appointmentDetails;
 
     @Column(nullable = false)
     private Boolean approved;

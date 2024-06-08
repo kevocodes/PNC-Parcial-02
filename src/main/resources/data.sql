@@ -1,4 +1,3 @@
-ALTER TABLE public."user" ALTER COLUMN active SET DEFAULT true;
 
 ALTER TABLE public."token" ALTER COLUMN active SET DEFAULT true;
 ALTER TABLE public."token" ALTER COLUMN "timestamp" SET DEFAULT CURRENT_TIMESTAMP;

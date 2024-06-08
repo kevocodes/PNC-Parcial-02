@@ -36,7 +36,7 @@ public class AppointmentServiceImplementation implements AppointmentService{
     public List<AppointmentXUser> readAppointmentXUserForPatient(UUID patientId) {
         List<Appointment> appointments = readAllAppointmentsForPatient(patientId);
 
-        return appointments.stream().flatMap(appointment->appointment.getAppointmentXUser().stream()).collect(Collectors.toList());
+        return appointments.stream().flatMap(appointment->appointment.getAppointmentDetails().stream()).collect(Collectors.toList());
     }
 
     @Override

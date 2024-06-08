@@ -15,21 +15,24 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class AppointmentXUser {
     
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID idAppointmentXUser;
 
     @ManyToOne
     @JoinColumn(name = "id_user", nullable = true, foreignKey = @ForeignKey(name = "FK_APPOINTMENTXUSER_USER"))
-    private User doctor;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "id_appointment", nullable = false, foreignKey = @ForeignKey(name = "FK_APPOINTMENTXUSER_APPOINTMENT"))

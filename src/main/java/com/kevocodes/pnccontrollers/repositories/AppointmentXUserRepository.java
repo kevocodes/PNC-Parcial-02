@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface AppointmentXUserRepository extends JpaRepository<AppointmentXUser, UUID>{
 
-    @Query("SELECT axu FROM AppointmentXUser axu WHERE axu.doctor.id = :userId")
+    @Query("SELECT axu FROM AppointmentXUser axu WHERE axu.user.id = :userId")
     List<AppointmentXUser> findAllByDoctorId(@Param("userId")UUID doctorId);
 }
