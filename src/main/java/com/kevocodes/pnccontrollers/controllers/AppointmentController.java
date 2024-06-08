@@ -1,5 +1,7 @@
 package com.kevocodes.pnccontrollers.controllers;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +45,9 @@ public class AppointmentController {
 
     @GetMapping("/get-all-appointments")
     public ResponseEntity<GeneralResponse> getAllAppointments(){
-        return new GeneralResponse.Builder().data(appointmentService.readAllAppointments()).build();
+
+        List<AppointmentDTO> appointmentList = appointmentService.readAllAppointments().stream().map(appointment -> modelMapper.map(appointment, AppointmentDTO.class)).toList();
+        return new GeneralResponse.Builder().data(appointmentList).build();
     }
 
 }

@@ -1,11 +1,6 @@
 package com.kevocodes.pnccontrollers.domain.entities;
 
 import java.util.UUID;
-import java.time.LocalDateTime;
-
-import org.hibernate.validator.constraints.Length;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
