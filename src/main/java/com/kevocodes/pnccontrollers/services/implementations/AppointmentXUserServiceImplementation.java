@@ -1,40 +1,19 @@
 package com.kevocodes.pnccontrollers.services.implementations;
 
 import com.kevocodes.pnccontrollers.domain.entities.AppointmentXUser;
-import com.kevocodes.pnccontrollers.handlers.ModelNotFoundException;
 import com.kevocodes.pnccontrollers.repositories.AppointmentXUserRepository;
 import com.kevocodes.pnccontrollers.services.AppointmentXUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
 public class AppointmentXUserServiceImplementation implements AppointmentXUserService {
 
-    private final AppointmentXUserRepository repository;
+    private final AppointmentXUserRepository repo;
 
     @Override
-    public void create(AppointmentXUser info) {
-        repository.save(info);
+    public void create(AppointmentXUser aux) {
+        repo.save(aux);
     }
-
-    @Override
-    public AppointmentXUser findById(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new ModelNotFoundException("Appointment not found"));
-    }
-
-    @Override
-    public List<AppointmentXUser> findAllByDoctorId(UUID id) {
-        return repository.findAll();
-    }
-
-    @Override
-    public List<AppointmentXUser> findAll() {
-        return repository.findAll();
-    }
-
-
 }

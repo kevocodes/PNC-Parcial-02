@@ -2,7 +2,6 @@ package com.kevocodes.pnccontrollers.services;
 
 import com.kevocodes.pnccontrollers.domain.dtos.UpdateUserInfoDTO;
 import com.kevocodes.pnccontrollers.domain.dtos.UserRegisterDTO;
-import com.kevocodes.pnccontrollers.domain.entities.Role;
 import com.kevocodes.pnccontrollers.domain.entities.Token;
 import com.kevocodes.pnccontrollers.domain.entities.User;
 

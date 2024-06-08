@@ -16,7 +16,7 @@ import java.util.UUID;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private UUID idUser;
 
     private String username;
 
@@ -33,7 +33,7 @@ public class User implements UserDetails {
     )
     private List<Role> roles;
 
-    @Column(name = "active", insertable = false)
+    @Column(name = "active")
     private boolean active;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
