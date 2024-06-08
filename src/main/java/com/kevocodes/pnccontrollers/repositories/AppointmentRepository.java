@@ -11,7 +11,7 @@ import com.kevocodes.pnccontrollers.domain.entities.Appointment;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, UUID>{
 
-    @Query("SELECT a FROM Appointment a WHERE a.patient.id = :userId")
+    @Query("SELECT a FROM Appointment a WHERE a.user.id = :userId")
     List<Appointment> readAllPatientAppointments(@Param("userId") UUID patientId);
     
 }

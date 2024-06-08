@@ -64,7 +64,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User findById(UUID id,  boolean justActives) {
-        User user = userRepository.findOneById(id);
+        User user = userRepository.findOneByIdUser(id);
 
         // If you want to get active and inactive user
         if (!justActives) return user;

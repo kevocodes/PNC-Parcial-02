@@ -60,7 +60,8 @@ public class WebSecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()  // Permitir todos los accesos a /api/auth/**
+                        .requestMatchers("/api/auth/**").permitAll()
+                        //.requestMatchers("/api/appointment/**").permitAll()  // Permitir todos los accesos a /api/auth/**
                         .anyRequest().authenticated())
                 .exceptionHandling(handling -> handling.authenticationEntryPoint((req, res, ex) -> {
                     res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed!");

@@ -50,4 +50,10 @@ public class AppointmentServiceImplementation implements AppointmentService{
         appointment.setApproved(true);
     }
 
+    @Override
+    public List<Appointment> readAllAppointments() {
+        // TODO Auto-generated method stub
+        return repository.findAll();
+    }
+
 }

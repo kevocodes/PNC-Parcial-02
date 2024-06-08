@@ -13,4 +13,5 @@ public interface AppointmentService {
     List<AppointmentXUser> readAppointmentXUserForPatient(UUID patientId);
     List<AppointmentXUser> readAllApointmentsForDoctors(UUID doctorId);
     void aproveAppointment(UUID appointmentId)throws Exception;
+    List<Appointment> readAllAppointments();
 }
