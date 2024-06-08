@@ -7,7 +7,6 @@ import com.kevocodes.pnccontrollers.domain.dtos.UpdateUserInfoDTO;
 import com.kevocodes.pnccontrollers.domain.entities.User;
 import com.kevocodes.pnccontrollers.services.UserService;
 import jakarta.validation.Valid;
-import org.hibernate.validator.constraints.ParameterScriptAssert;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -83,7 +82,7 @@ public class UserController {
 
         // Validate if the new email is already exists
         User userByEmail = userService.findByIdentifier(info.getEmail(), false);
-        if (userByEmail != null && !userByEmail.getId().equals(id)) {
+        if (userByEmail != null && !userByEmail.getIdUser().equals(id)) {
             return GeneralResponse.builder()
                     .message("Email already exists")
                     .status(HttpStatus.CONFLICT)
@@ -92,7 +91,7 @@ public class UserController {
 
         // Validate if the new username already exists
         User userByUsername = userService.findByIdentifier(info.getUsername(), false);
-        if (userByUsername != null && !userByUsername.getId().equals(id)) {
+        if (userByUsername != null && !userByUsername.getIdUser().equals(id)) {
             return GeneralResponse.builder()
                     .message("Username already exists")
                     .status(HttpStatus.CONFLICT)

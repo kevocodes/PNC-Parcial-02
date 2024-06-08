@@ -1,6 +1,5 @@
 package com.kevocodes.pnccontrollers.repositories;
 
-import java.util.Date;
 import java.util.UUID;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import com.kevocodes.pnccontrollers.domain.entities.Appointment;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, UUID>{
 
-    /*@Query(value = "SELECT * from Appointment a WHERE a.endDate = :date")
-    List<Appointment> getAppointmentsByDate(@Param("date") Date thisDate);*/
+    @Query("SELECT a FROM Appointment a WHERE a.patient.id = :userId")
+    List<Appointment> readAllPatientAppointments(@Param("userId") UUID patientId);
     
 }

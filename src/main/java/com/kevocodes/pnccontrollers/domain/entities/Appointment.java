@@ -1,10 +1,9 @@
 package com.kevocodes.pnccontrollers.domain.entities;
 
-import java.util.Date;
 import java.util.UUID;
+import java.util.List;
 
-import org.hibernate.validator.constraints.Length;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -13,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,18 +28,12 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "id_user", nullable = true, foreignKey = @ForeignKey(name = "FK_APPOINTMENT_USER"))
-    private User patient;
+    private User user;
 
-    @Column(nullable = false)
-    private Date appointmentDate;
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL)
+    List<AppointmentXUser> appointmentXUser;
 
     @Column(nullable = false)
     private Boolean approved;
 
-    @Column(nullable = true)
-    private Date endDate;
-
-    @Column(nullable = false)
-    @Length(min = 2, max =  9999)
-    private String reason;
 }

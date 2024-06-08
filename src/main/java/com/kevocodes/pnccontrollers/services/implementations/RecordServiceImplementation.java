@@ -1,8 +1,6 @@
 package com.kevocodes.pnccontrollers.services.implementations;
 
-import com.kevocodes.pnccontrollers.domain.dtos.RecordDTO;
 import com.kevocodes.pnccontrollers.domain.entities.Record;
-import com.kevocodes.pnccontrollers.domain.entities.User;
 import com.kevocodes.pnccontrollers.repositories.RecordRepository;
 import com.kevocodes.pnccontrollers.services.RecordService;
 import lombok.RequiredArgsConstructor;

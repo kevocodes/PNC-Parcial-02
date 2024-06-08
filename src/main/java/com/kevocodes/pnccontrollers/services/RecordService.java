@@ -1,8 +1,6 @@
 package com.kevocodes.pnccontrollers.services;
 
-import com.kevocodes.pnccontrollers.domain.dtos.RecordDTO;
 import com.kevocodes.pnccontrollers.domain.entities.Record;
-import com.kevocodes.pnccontrollers.domain.entities.User;
 
 import java.util.List;
 
